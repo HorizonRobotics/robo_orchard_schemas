@@ -1,0 +1,43 @@
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+package robo_orchard_schemas.sensor_msgs;
+
+// The JointState message that expresses sensor_msgs/JointState in
+// ros2.
+message JointState {
+  // Usually the frame id of the joint is not necessary because the
+  // joint position is always local. We still keep it for the
+  // compatibility with the ROS message.
+  optional string frame_id = 1;
+
+  optional string name = 2;
+
+  // The position of the joint
+  optional float position = 3;
+
+  // The velocity of the joint
+  optional float velocity = 4;
+
+  // The effort of the joint
+  optional float effort = 5;
+}
+
+// The JointState with timestamp.
+message JointStateStamped {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The name of the joint
+  JointState state = 2;
+}
+
+// Multiple JointState with the same timestamp.
+message MultiJointStateStamped {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The name of the joint
+  repeated JointState states = 2;
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "foxglove/Quaternion.proto";
+import "foxglove/Vector3.proto";
+
+package robo_orchard_schemas.geometry_msgs;
+
+// The transform inside a frame. Usually used to represent the
+// position and orientation delta in a specific time period.
+// The value of TransformInFrame is defined by user and
+// can vary depending on the application protocol.
+message TransformInFrame {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  // Frame this data is associated with
+  string frame_id = 2;
+
+  // Translation component of the transform
+  foxglove.Vector3 translation = 3;
+
+  // Rotation component of the transform
+  foxglove.Quaternion rotation = 4;
+
+  // The previous timestamp of the transform.
+  optional google.protobuf.Timestamp prev_timestamp = 5;
+}

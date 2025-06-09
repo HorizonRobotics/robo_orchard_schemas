@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+package robo_orchard_schemas.std_msgs;
+
+message Int32Array {
+  repeated int32 data = 1;
+}
+
+message Int32ArrayStamped {
+  google.protobuf.Timestamp timestamp = 1;
+  repeated int32 data = 2;
+}
+
+message StringArry {
+  repeated string data = 1;
+}
+
+message StringArryStamped {
+  google.protobuf.Timestamp timestamp = 1;
+  repeated string data = 2;
+}
+
+message BoolArray {
+  repeated bool data = 1;
+}
+
+message BoolArrayStamped {
+  google.protobuf.Timestamp timestamp = 1;
+  repeated bool data = 2;
+}
+
+message FloatArray {
+  repeated float data = 1;
+}
+
+message FloatArrayStamped {
+  google.protobuf.Timestamp timestamp = 1;
+  repeated float data = 2;
+}

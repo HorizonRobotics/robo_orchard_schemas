@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package robo_orchard_schemas.robot_msgs;
+
+// The URDF message that expresses the URDF of the robot.
+message URDF {
+  // The name of the robot
+  optional string name = 1;
+
+  // The urdf content in XML format
+  optional string xml_content = 2;
+}

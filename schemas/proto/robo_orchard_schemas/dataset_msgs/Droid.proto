@@ -1,0 +1,95 @@
+
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "foxglove/PoseInFrame.proto";
+import "robo_orchard_schemas/geometry_msgs/TransformInFrame.proto";
+import "robo_orchard_schemas/sensor_msgs/JointState.proto";
+
+package robo_orchard_schemas.dataset_msgs.droid;
+
+// Information about the previous robot state.
+// This message does not contain the previous robot state,
+// but rather the information about the previous robot state.
+message RobotStatePrevInfo {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  // Whether the previous command was successful
+  bool prev_command_successful = 2;
+
+  // The latency of the controller in milliseconds
+  float prev_controller_latency_ms = 3;
+
+  // The previous joint torques computed by the controller
+  repeated float prev_joint_torques_computed = 4;
+
+  // The previous joint torques computed by the controller
+  // but safened by post-processing
+  repeated float prev_joint_torques_computed_safened = 5;
+}
+
+message ControllerInfo {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  bool controller_on = 2;
+  bool failure = 3;
+  bool movement_enabled = 4;
+  bool success = 5;
+}
+
+// The robot action state.
+message ActionState {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+  // The pose of the end effector
+  foxglove.PoseInFrame ee_pose = 2;
+  // The difference between the current and last end effector pose. This is
+  // useful for controllers that need to know the change/volocity of the end
+  // effector.
+  robo_orchard_schemas.geometry_msgs.TransformInFrame ee_pose_diff = 3;
+  // The gripper state
+  robo_orchard_schemas.sensor_msgs.JointStateStamped gripper = 4;
+  // The joint states
+  robo_orchard_schemas.sensor_msgs.MultiJointStateStamped joints = 5;
+  // Whether the action should be skipped in controller
+  bool skip_action = 6;
+}
+
+// The timestamps information about env step.
+message EnvStepTimestamps {
+  // Time when the step started
+  google.protobuf.Timestamp step_start = 1;
+
+  google.protobuf.Timestamp policy_start = 2;
+
+  google.protobuf.Timestamp sleep_start = 3;
+
+  google.protobuf.Timestamp control_start = 4;
+
+  google.protobuf.Timestamp step_end = 5;
+}
+
+message RobotStateTimestamps {
+  google.protobuf.Timestamp read_start = 1;
+  google.protobuf.Timestamp robot_timestamp = 2;
+  google.protobuf.Timestamp read_end = 3;
+}
+
+message CameraTimestamps {
+  google.protobuf.Timestamp read_start = 1;
+  google.protobuf.Timestamp estimated_capture = 2;
+  google.protobuf.Timestamp frame_received = 3;
+  google.protobuf.Timestamp read_end = 4;
+}
+
+message InstructionInfo {
+  // Time of the header
+  google.protobuf.Timestamp timestamp = 1;
+
+  // The instructions to be sent to the robot
+  repeated string instructions = 2;
+
+  bool instruction_success = 3;
+}
