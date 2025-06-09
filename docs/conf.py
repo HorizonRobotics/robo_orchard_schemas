@@ -26,7 +26,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__))))
 
-import re
+import re  # noqa: I001
 from collections import OrderedDict
 
 from doc_gen import gen_index
