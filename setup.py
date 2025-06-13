@@ -104,7 +104,7 @@ def get_version() -> str:
                 "try to using base version.",
                 UserWarning,
             )
-            full_version = f"{base_version}.dev"
+            full_version = f"{base_version}.dev.{repo_git_hash}"
 
     with open(
         os.path.join(PYTHON_BASE_DIR, PROJECT_NAME, "version.py"), "w"
