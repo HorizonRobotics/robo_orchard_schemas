@@ -26,14 +26,20 @@ message InstructionStamped {
   // Time of the header
   google.protobuf.Timestamp timestamp = 1;
 
-  // The instruction name, like "move_to", "pick", "place", etc.
-  optional string name = 2;
+  // The instruction names, like "move_to", "pick", "place", etc.
+  // There can be multiple names for the same instruction.
+  // For example, "move_to" and "go_to" can be used interchangeably.
+  repeated string names = 2;
 
   // The instruction description, which can be used to provide more details
   // about the instruction.
-  optional string description = 3;
+  // Multiple descriptions can be provided to give different perspectives
+  // or explanations of the same instruction.
+  repeated string descriptions = 3;
 
   // The instruction goal, which can be used to specify the target or
   // objective of the instruction.
-  optional string goal = 4;
+  // Multiple goals can be provided to indicate different targets or
+  // objectives for the same instruction.
+  repeated string goals = 4;
 }
